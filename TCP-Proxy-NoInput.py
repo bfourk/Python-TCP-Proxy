@@ -31,7 +31,7 @@ def dbPrint(val):
 	if debugMode:
 		print(val)
 
-def InputSanityCheck(inputPort): # should be named InputPortSanityCheck
+def InputSanityCheck(inputPort): # should've been named InputPortSanityCheck
 	try:
 		inputPort = int(inputPort)
 	except:
