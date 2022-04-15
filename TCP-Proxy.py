@@ -22,7 +22,7 @@ def dbPrint(val):
 	if debugMode:
 		print(val)
 
-def InputSanityCheck(inp): # should be named InputPortSanityCheck
+def InputSanityCheck(inp): # should've been named InputPortSanityCheck
 	while True:
 		p1 = input(inp)
 		try:
