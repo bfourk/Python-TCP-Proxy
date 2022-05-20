@@ -19,10 +19,10 @@ BufferSize = 4096 # Use a value divisible by 1024, ex. 1024, 2048, 4096
 # Depending on the amount of data being sent, you might want to increase/decrease the buffer size.
 # If you don't know what this means, keeping the default is fine.
 
-IPRegex = "[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?\.[0-9][0-9]?[0-9]?"
+IPRegex = "^([0-9]{1,3}\.){3}[0-9]{1,3}$"
 # Regular Expression to detect IP addresses
 
-DomainRegex = "(.*)\.(.*)"
+DomainRegex = "^([a-zA-Z0-9\-\.]*)\.([a-zA-Z0-9]*)$"
 # Regular Expression to detect domains
 
 debugMode = False # print when the server and proxy communicate (will spam the console)
