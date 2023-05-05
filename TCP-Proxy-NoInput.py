@@ -92,14 +92,7 @@ def SockRecv(proxyCon,serverSock):
 			dbPrint("Killing thread, proxy send error")
 			break
 
-while True:
-	proxyCon,addr = sock.accept() # Accept the connection from the proxy's socket
-	
-	serverSock = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # Make a new socket for the proxy to talk to the server with
-	serverSock.connect((addr2,rport)) # Connect to the server
-	
-	Thread(target = SockRecv, args = (proxyCon, serverSock)).start() # Start the server send/recieve task
-	
+def SockSend(proxyCon,serverSock):
 	while True: # The proxy send/recieve task
 		proxyRecvData = proxyCon.recv(BufferSize) # Recieve data from local connector
 		if not proxyRecvData: # If the server sent back no data, it means a terminated connection
@@ -109,3 +102,12 @@ while True:
 			break
 		dbPrint("PROXY -> SERVER: {0}".format(len(proxyRecvData))) # debug
 		serverSock.sendall(proxyRecvData) # Send the server all the data we recieved from the client
+
+while True:
+	proxyCon,addr = sock.accept() # Accept the connection from the proxy's socket
+	
+	serverSock = socket.socket(socket.AF_INET,socket.SOCK_STREAM) # Make a new socket for the proxy to talk to the server with
+	serverSock.connect((addr2,rport)) # Connect to the server
+	
+	Thread(target = SockRecv, args = (proxyCon, serverSock)).start() # Start the server recieve thread
+	Thread(target = SockSend, args = (proxyCon, serverSock)).start() # Start the server send thread
